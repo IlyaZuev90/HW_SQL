@@ -13,10 +13,10 @@ import static ru.netology.data.SQLHelper.cleanDatabase;
 
 public class BankLoginTest {
 
-    @AfterAll
-    static void tearDown() {
-        cleanDatabase();
-    }
+//    @AfterAll
+//    static void tearDown() {
+//        cleanDatabase();
+//    }
 
     @Test
     @DisplayName("Should successfully login to dashboard with exist login and password from sut test data")
