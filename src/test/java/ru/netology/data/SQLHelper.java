@@ -1,6 +1,5 @@
 package ru.netology.data;
 
-import lombok.Data;
 import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -23,15 +22,26 @@ public class SQLHelper {
 
     @SneakyThrows
     public static DataHelper.VerificationCode getVerificationCode() {
-        var codeSQL = "SELECT code FROM auth_codes ORDER BY created DESC LIMIT 1";
         var conn = getConn();
+        var codeSQL = "SELECT code FROM auth_codes ORDER BY created DESC LIMIT 1";
         var code = runner.query(conn, codeSQL, new ScalarHandler<String>());
+
         return new DataHelper.VerificationCode(code);
+    }
+
+    @SneakyThrows
+    public static String getUserStatus() {
+        var conn = getConn();
+        var statusSQL = "SELECT status FROM users WHERE login = 'vasya'";
+        var status = runner.query(conn, statusSQL, new ScalarHandler<String>());
+
+        return status;
     }
 
     @SneakyThrows
     public static void cleanDatabase() {
         var conn = getConn();
+
         runner.execute(conn, "DELETE FROM auth_codes");
         runner.execute(conn, "DELETE FROM card_transactions");
         runner.execute(conn, "DELETE FROM cards");

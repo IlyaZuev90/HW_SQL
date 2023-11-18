@@ -38,8 +38,11 @@ public class DataHelper {
     }
 
     @Value
+    public static class AuthInfoStatus{
+        String status;
+    }
+    @Value
     public static class VerificationCode {
         String code;
     }
-
 }
